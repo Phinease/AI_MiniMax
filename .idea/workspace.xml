@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="">
+    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="TP3 - 1 Over">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,13 +66,13 @@
     <property name="project.structure.side.proportion" value="0.1875" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.DominosGame">
-    <configuration name="DominosGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="games.dominos.DominosGame" />
+  <component name="RunManager" selected="Application.AwaleGame">
+    <configuration name="AwaleGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="games.awale.AwaleGame" />
       <module name="iialib.main" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="games.dominos.*" />
+          <option name="PATTERN" value="games.awale.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -95,13 +93,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration name="DominosGame" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="games.dominos.DominosGame" />
+      <module name="iialib.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="games.dominos.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -129,6 +142,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AwaleGame" />
         <item itemvalue="Gradle.TP_IA [dependencies]" />
         <item itemvalue="Application.DominosGame" />
       </list>
@@ -144,7 +158,8 @@
       <updated>1612538649256</updated>
       <workItem from="1612538651463" duration="296000" />
       <workItem from="1612538964292" duration="1662000" />
-      <workItem from="1613251131780" duration="596000" />
+      <workItem from="1613251131780" duration="2571000" />
+      <workItem from="1613253924716" duration="5342000" />
     </task>
     <task id="LOCAL-00001" summary="TP3 - 1 Over">
       <created>1613228706231</created>
@@ -153,7 +168,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613228706231</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="TP3 - 1 Over">
+      <created>1613251952756</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1613251952757</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
