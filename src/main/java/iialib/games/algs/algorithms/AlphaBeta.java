@@ -33,29 +33,31 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         this(playerMaxRole, playerMinRole, h);
         this.depthMax = depthMax;
     }
+
     private int minMax(Board board, int depth) {
-//        System.out.println("Prof: " + depth);
+        // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMinRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMinRole);
         } else {
             for (Move move : moves) {
-                beta= Math.min(beta, maxMin(board.play(move, playerMinRole), depth + 1));
-                if (alpha>=beta)
+                beta = Math.min(beta, maxMin(board.play(move, playerMinRole), depth + 1));
+                if (alpha >= beta)
                     return alpha;
             }
             return beta;
         }
     }
+
     private int maxMin(Board board, int depth) {
-//        System.out.println("Prof: " + depth);
+        // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMaxRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMaxRole);
         } else {
             for (Move move : moves) {
                 alpha = Math.max(alpha, minMax(board.play(move, playerMaxRole), depth + 1));
-                if(alpha>=beta)
+                if (alpha >= beta)
                     return beta;
             }
             return alpha;
@@ -64,12 +66,12 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
 
     @Override
     public Move bestMove(Board board, Role playerRole) {
-        System.out.println("[alphabeta]");
+        System.out.println("[AlphaBeta]");
 
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
         Board firstTry = board.play(bestMove, playerRole);
-        int best = (playerRole == playerMaxRole)?maxMin(firstTry, 1):minMax(firstTry, 1);
+        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1) : minMax(firstTry, 1);
 
         if (playerRole == playerMaxRole) {
             for (int i = 1; i < moves.size(); i++) {

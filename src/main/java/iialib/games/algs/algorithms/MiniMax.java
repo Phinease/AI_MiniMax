@@ -112,7 +112,7 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
      */
 
     private int minMax(Board board, int depth) {
-//        System.out.println("Prof: " + depth);
+        // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMinRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMinRole);
@@ -126,7 +126,7 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
     }
 
     private int maxMin(Board board, int depth) {
-//        System.out.println("Prof: " + depth);
+        // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMaxRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMaxRole);

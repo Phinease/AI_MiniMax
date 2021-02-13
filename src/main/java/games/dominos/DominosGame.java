@@ -19,16 +19,17 @@ public class DominosGame extends AbstractGame<DominosMove, DominosRole, DominosB
         DominosRole roleV = DominosRole.VERTICAL;
         DominosRole roleH = DominosRole.HORIZONTAL;
 
-//        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new MiniMax<>(
-//                roleV, roleH, DominosHeuristics.hVertical, 4); // Minimax depth 4
-//
-//        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algH = new MiniMax<>(
-//                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Minimax depth 2
-        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new AlphaBeta<>(
-                roleV, roleH, DominosHeuristics.hVertical, 4); // Alphabeta depth 4
+        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new MiniMax<>(
+                roleV, roleH, DominosHeuristics.hVertical, 4); // Minimax depth 4
 
-        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algH = new AlphaBeta<>(
-                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Alphabeta depth 2
+        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algH = new MiniMax<>(
+                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Minimax depth 2
+
+//        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new AlphaBeta<>(
+//                roleV, roleH, DominosHeuristics.hVertical, 4); // Alphabeta depth 4
+//
+//        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algH = new AlphaBeta<>(
+//                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Alphabeta depth 2
 
 
         AIPlayer<DominosMove, DominosRole, DominosBoard> playerV = new AIPlayer<>(
