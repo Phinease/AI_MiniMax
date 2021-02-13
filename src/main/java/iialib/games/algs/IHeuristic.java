@@ -11,7 +11,6 @@ public interface IHeuristic<Board extends IBoard<?,Role, Board>,Role extends IRo
 	public static int MIN_VALUE = java.lang.Integer.MIN_VALUE;
 	public static int MAX_VALUE = java.lang.Integer.MAX_VALUE;
 		
-	int eval(Board board,Role role);//
-
+	int eval(Board board,Role role);
 }
  

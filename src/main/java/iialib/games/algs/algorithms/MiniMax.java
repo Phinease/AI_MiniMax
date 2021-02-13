@@ -6,80 +6,134 @@ import iialib.games.model.IBoard;
 import iialib.games.model.IMove;
 import iialib.games.model.IRole;
 
-public class MiniMax<Move extends IMove,Role extends IRole,Board extends IBoard<Move,Role,Board>> implements GameAlgorithm<Move,Role,Board> {
+import java.util.ArrayList;
 
-	// Constants
-	/** Defaut value for depth limit 
+public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoard<Move, Role, Board>> implements GameAlgorithm<Move, Role, Board> {
+
+    // Constants
+    /**
+     * Defaut value for depth limit
      */
-	private final static int DEPTH_MAX_DEFAUT = 4;
+    private final static int DEPTH_MAX_DEFAUT = 4;
 
-	// Attributes
-	/** Role of the max player 
+    // Attributes
+    /**
+     * Role of the max player
      */
-	private final Role playerMaxRole;
+    private final Role playerMaxRole;
 
-	/** Role of the min player 
+    /**
+     * Role of the min player
      */
-	private final Role playerMinRole;
+    private final Role playerMinRole;
 
-	/** Algorithm max depth
+    /**
+     * Algorithm max depth
      */
-	private int depthMax = DEPTH_MAX_DEFAUT;
+    private int depthMax = DEPTH_MAX_DEFAUT;
 
-	
-	/** Heuristic used by the max player 
+
+    /**
+     * Heuristic used by the max player
      */
-	private IHeuristic<Board, Role> h;
+    private IHeuristic<Board, Role> h;
 
-	//
-	/** number of internal visited (developed) nodes (for stats)
+    //
+    /**
+     * number of internal visited (developed) nodes (for stats)
      */
-	private int nbNodes;
-	
-	/** number of leaves nodes nodes (for stats)
+    private int nbNodes;
 
+    /**
+     * number of leaves nodes nodes (for stats)
      */
-	private int nbLeaves;
+    private int nbLeaves;
 
-	// --------- Constructors ---------
+    // --------- Constructors ---------
 
-	public MiniMax(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h) {
-		this.playerMaxRole = playerMaxRole;
-		this.playerMinRole = playerMinRole;
-		this.h = h;
-	}
+    public MiniMax(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h) {
+        this.playerMaxRole = playerMaxRole;
+        this.playerMinRole = playerMinRole;
+        this.h = h;
+    }
 
-	//
-	public MiniMax(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {
-		this(playerMaxRole, playerMinRole, h);
-		this.depthMax = depthMax;
-	}
+    //
+    public MiniMax(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {
+        this(playerMaxRole, playerMinRole, h);
+        this.depthMax = depthMax;
+    }
 
-	/*
-	 * IAlgo METHODS =============
-	 */
+    /*
+     * IAlgo METHODS =============
+     */
 
-	@Override
-	public Move bestMove(Board board, Role playerRole) {
-		System.out.println("[MiniMax]");
+    @Override
+    public Move bestMove(Board board, Role playerRole) {
+        System.out.println("[MiniMax]");
 
-		Move bestMove = null;
+        ArrayList<Move> moves = board.possibleMoves(playerRole);
+        Move bestMove = moves.get(0);
+        Board firstTry = board.play(bestMove, playerRole);
+        int best = (playerRole == playerMaxRole)?maxMin(firstTry, 1):minMax(firstTry, 1);
 
-		// TODO
-		return bestMove;
-	}
+        if (playerRole == playerMaxRole) {
+            for (int i = 1; i < moves.size(); i++) {
+                int newVal = maxMin(firstTry, 1);
+                if (newVal > best) {
+                    bestMove = moves.get(i);
+                    best = newVal;
+                }
+            }
+        } else {
+            for (int i = 1; i < moves.size(); i++) {
+                int newVal = minMax(firstTry, 1);
+                if (newVal < best) {
+                    bestMove = moves.get(i);
+                    best = newVal;
+                }
+            }
+        }
 
-	/*
-	 * PUBLIC METHODS ==============
-	 */
+        return bestMove;
+    }
 
-	public String toString() {
-		return "MiniMax(ProfMax=" + depthMax + ")";
-	}
+    /*
+     * PUBLIC METHODS ==============
+     */
 
-	/*
-	 * PRIVATE METHODS ===============
-	 */
+    public String toString() {
+        return "MiniMax(ProfMax=" + depthMax + ")";
+    }
 
-	//TODO
+    /*
+     * PRIVATE METHODS ===============
+     */
+
+    private int minMax(Board board, int depth) {
+//        System.out.println("Prof: " + depth);
+        ArrayList<Move> moves = board.possibleMoves(playerMinRole);
+        if (depth == depthMax || moves.isEmpty()) {
+            return h.eval(board, playerMinRole);
+        } else {
+            int min = IHeuristic.MAX_VALUE;
+            for (Move move : moves) {
+                min = Math.min(min, maxMin(board.play(move, playerMinRole), depth + 1));
+            }
+            return min;
+        }
+    }
+
+    private int maxMin(Board board, int depth) {
+//        System.out.println("Prof: " + depth);
+        ArrayList<Move> moves = board.possibleMoves(playerMaxRole);
+        if (depth == depthMax || moves.isEmpty()) {
+            return h.eval(board, playerMaxRole);
+        } else {
+            int max = IHeuristic.MIN_VALUE;
+            for (Move move : moves) {
+                max = Math.min(max, minMax(board.play(move, playerMaxRole), depth + 1));
+            }
+            return max;
+        }
+    }
 }
