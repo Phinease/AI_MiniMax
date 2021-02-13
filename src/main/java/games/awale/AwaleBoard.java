@@ -23,8 +23,10 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         }
     }
 
-    public AwaleBoard(int[][] other) {
+    public AwaleBoard(int[][] other, int TopScore, int DownScore) {
         boardGrid = other;
+        this.TopScore = TopScore;
+        this.DownScore = DownScore;
     }
 
     @Override
@@ -67,19 +69,20 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             }
         }
 
+        int newTopScore = TopScore;
+        int newDownScore = DownScore;
         int[][] backup = newGrid.clone();
         int enemy = (playerRole == AwaleRole.Top) ? 1 : 0;
         if (player == enemy) {
             boolean bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
             while (bonus) {
                 if (playerRole == AwaleRole.Top) {
-                    TopScore += newGrid[player][index];
+                    newTopScore += newGrid[player][index];
                 } else {
-                    DownScore += newGrid[player][index];
+                    newDownScore += newGrid[player][index];
                 }
 
                 newGrid[player][index] = 0;
-                System.out.println("CONGRADUATION!!!!!!!!!!!!!!");
                 index += (player == 0) ? 1 : -1;
 
                 if (index >= GRID_LENGTH) {
@@ -98,8 +101,12 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         for (int i = 0; i < GRID_LENGTH; i++) {
             famine = famine && (newGrid[enemy][i] == 0);
         }
-        if (famine) newGrid = backup;
-        return new AwaleBoard(newGrid);
+        if (famine) {
+            newGrid = backup;
+            newTopScore = TopScore;
+            newDownScore = DownScore;
+        }
+        return new AwaleBoard(newGrid, newTopScore, newDownScore);
     }
 
     @Override
