@@ -36,7 +36,7 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
     /**
      * Heuristic used by the max player
      */
-    private IHeuristic<Board, Role> h;
+    private final IHeuristic<Board, Role> h;
 
     //
     /**
@@ -55,6 +55,8 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
         this.playerMaxRole = playerMaxRole;
         this.playerMinRole = playerMinRole;
         this.h = h;
+        nbLeaves = 0;
+        nbNodes = 0;
     }
 
     //

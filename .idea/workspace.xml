@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/TP_IA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="TP3 - 1 Over">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosHeuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosHeuristics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/IHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/IHeuristic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/MiniMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/MiniMax.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/model/IMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/model/IMove.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +19,13 @@
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
     </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -41,7 +39,9 @@
     </file-type-list>
   </component>
   <component name="ProjectId" id="1o4Gr8dLCk9ZaG7mtA5KlQk5YRI" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -134,12 +134,33 @@
       <workItem from="1612538651463" duration="296000" />
       <workItem from="1612538964292" duration="1662000" />
     </task>
+    <task id="LOCAL-00001" summary="TP3 - 1 Over">
+      <created>1613228706231</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1613228706231</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="TP3 - 1 Over" />
+    <option name="LAST_COMMIT_MESSAGE" value="TP3 - 1 Over" />
   </component>
 </project>
