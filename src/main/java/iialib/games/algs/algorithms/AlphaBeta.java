@@ -64,6 +64,31 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
 
     @Override
     public Move bestMove(Board board, Role playerRole) {
-        return null;
+        System.out.println("[alphabeta]");
+
+        ArrayList<Move> moves = board.possibleMoves(playerRole);
+        Move bestMove = moves.get(0);
+        Board firstTry = board.play(bestMove, playerRole);
+        int best = (playerRole == playerMaxRole)?maxMin(firstTry, 1):minMax(firstTry, 1);
+
+        if (playerRole == playerMaxRole) {
+            for (int i = 1; i < moves.size(); i++) {
+                int newVal = maxMin(firstTry, 1);
+                if (newVal > best) {
+                    bestMove = moves.get(i);
+                    best = newVal;
+                }
+            }
+        } else {
+            for (int i = 1; i < moves.size(); i++) {
+                int newVal = minMax(firstTry, 1);
+                if (newVal < best) {
+                    bestMove = moves.get(i);
+                    best = newVal;
+                }
+            }
+        }
+
+        return bestMove;
     }
 }

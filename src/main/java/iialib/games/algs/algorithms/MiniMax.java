@@ -133,7 +133,7 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
         } else {
             int max = IHeuristic.MIN_VALUE;
             for (Move move : moves) {
-                max = Math.min(max, minMax(board.play(move, playerMaxRole), depth + 1));
+                max = Math.max(max, minMax(board.play(move, playerMaxRole), depth + 1));
             }
             return max;
         }
