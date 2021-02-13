@@ -4,8 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="awale">
+    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,15 +95,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -143,6 +144,7 @@
       <updated>1612538649256</updated>
       <workItem from="1612538651463" duration="296000" />
       <workItem from="1612538964292" duration="1662000" />
+      <workItem from="1613251131780" duration="596000" />
     </task>
     <task id="LOCAL-00001" summary="TP3 - 1 Over">
       <created>1613228706231</created>
@@ -151,14 +153,7 @@
       <option name="project" value="LOCAL" />
       <updated>1613228706231</updated>
     </task>
-    <task id="LOCAL-00002" summary="awale">
-      <created>1613250455296</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1613250455296</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,7 +173,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TP3 - 1 Over" />
-    <MESSAGE value="awale" />
-    <option name="LAST_COMMIT_MESSAGE" value="awale" />
+    <option name="LAST_COMMIT_MESSAGE" value="TP3 - 1 Over" />
   </component>
 </project>

@@ -8,21 +8,22 @@ import iialib.games.algs.algorithms.MiniMax;
 
 import java.util.ArrayList;
 
-public class AwaleGame extends AbstractGame<DominosMove, DominosRole, AwaleBoard> {
-    public AwaleGame(ArrayList<AIPlayer<DominosMove, DominosRole, DominosBoard>> aiPlayers, DominosBoard initialBoard) {
+public class AwaleGame extends AbstractGame<AwaleMove, AwaleRole, AwaleBoard> {
+
+    public AwaleGame(ArrayList<AIPlayer<AwaleMove, AwaleRole, AwaleBoard>> aiPlayers, AwaleBoard initialBoard) {
         super(aiPlayers, initialBoard);
     }
 
     public static void main(String[] args) {
 
-        DominosRole roleV = DominosRole.VERTICAL;
-        DominosRole roleH = DominosRole.HORIZONTAL;
+        AwaleRole roleT = AwaleRole.Top;
+        AwaleRole roleD = AwaleRole.Down;
 
-        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new MiniMax<>(
-                roleV, roleH, DominosHeuristics.hVertical, 4); // Minimax depth 4
+        GameAlgorithm<AwaleMove, AwaleRole, AwaleBoard> algT = new MiniMax<>(
+                roleT, roleD, AwaleHeuristics.hTop, 4); // Minimax depth 4
 
-        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algH = new MiniMax<>(
-                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Minimax depth 2
+        GameAlgorithm<AwaleMove, AwaleRole, AwaleBoard> algD = new MiniMax<>(
+                roleD, roleT, AwaleHeuristics.hDown, 2); // Minimax depth 2
 
 //        GameAlgorithm<DominosMove, DominosRole, DominosBoard> algV = new AlphaBeta<>(
 //                roleV, roleH, DominosHeuristics.hVertical, 4); // Alphabeta depth 4
@@ -31,13 +32,13 @@ public class AwaleGame extends AbstractGame<DominosMove, DominosRole, AwaleBoard
 //                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Alphabeta depth 2
 
 
-        AIPlayer<DominosMove, DominosRole, DominosBoard> playerV = new AIPlayer<>(
-                roleV, algV);
+        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerV = new AIPlayer<>(
+                roleT, algT);
 
-        AIPlayer<DominosMove, DominosRole, DominosBoard> playerH = new AIPlayer<>(
-                roleH, algH);
+        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerH = new AIPlayer<>(
+                roleD, algD);
 
-        ArrayList<AIPlayer<DominosMove, DominosRole, DominosBoard>> players = new ArrayList<>();
+        ArrayList<AIPlayer<AwaleMove, AwaleRole, AwaleBoard>> players = new ArrayList<>();
 
         players.add(playerV); // First Player
         players.add(playerH); // Second Player
