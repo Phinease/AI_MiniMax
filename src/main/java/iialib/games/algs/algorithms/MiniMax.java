@@ -64,6 +64,7 @@ public class MiniMax<Move extends IMove,Role extends IRole,Board extends IBoard<
 		System.out.println("[MiniMax]");
 
 		Move bestMove = null;
+
 		// TODO
 		return bestMove;
 	}
