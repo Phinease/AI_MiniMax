@@ -34,17 +34,20 @@ public class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         int x=move.take;
         if(playerRole==AwaleRole.Top){
             if(x<=2){
-                for(int i=1;i<4;i++){
+                for(int i=1;i<=4;i++){
                     newGrid[0][x+i]+=1;
                 }
             }else{
-                if(x+4>5){
-                    int i=4;
-                    while(x+4<=5){
-
+                int n=4;
+                for(int i=1;i<=4;i++){
+                    if(x+1<=5){
+                        newGrid[0][x+i]+=1;
+                        n--;
                     }
+                    else
+                        break;
                 }
-                }
+
             }
         }
 
