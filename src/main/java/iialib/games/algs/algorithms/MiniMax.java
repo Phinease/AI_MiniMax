@@ -76,12 +76,13 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
         Board firstTry = board.play(bestMove, playerRole);
-        int best = (playerRole == playerMaxRole)?maxMin(firstTry, 1):minMax(firstTry, 1);
+        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1) : minMax(firstTry, 1);
 
         if (playerRole == playerMaxRole) {
             for (int i = 1; i < moves.size(); i++) {
                 int newVal = maxMin(firstTry, 1);
                 if (newVal > best) {
+                    System.out.println("CHECK1");
                     bestMove = moves.get(i);
                     best = newVal;
                 }
@@ -90,6 +91,7 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
             for (int i = 1; i < moves.size(); i++) {
                 int newVal = minMax(firstTry, 1);
                 if (newVal < best) {
+                    System.out.println("CHECK2");
                     bestMove = moves.get(i);
                     best = newVal;
                 }

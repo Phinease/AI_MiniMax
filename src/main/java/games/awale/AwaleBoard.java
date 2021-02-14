@@ -12,9 +12,9 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
     private final int[][] boardGrid;
     private int TopScore = 0;
     private int DownScore = 0;
-    public int nbSeedTop=0;
-    public int nbSeedDown=0;
-    public int nbSeedRest=0;
+    public int nbSeedTop = 0;
+    public int nbSeedDown = 0;
+    public int nbSeedRest;
 
     // ---------------------- Constructors ---------------------
     public AwaleBoard() {
@@ -24,22 +24,22 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 boardGrid[i][j] = 4;
             }
         }
-        for(int j=0;j<GRID_LENGTH;j++){
-            nbSeedTop+=boardGrid[0][j];
-            nbSeedDown+=boardGrid[1][j];
+        for (int j = 0; j < GRID_LENGTH; j++) {
+            nbSeedTop += boardGrid[0][j];
+            nbSeedDown += boardGrid[1][j];
         }
-        nbSeedRest=nbSeedDown+nbSeedTop;
+        nbSeedRest = nbSeedDown + nbSeedTop;
     }
 
     public AwaleBoard(int[][] other, int TopScore, int DownScore) {
         boardGrid = other;
         this.TopScore = TopScore;
         this.DownScore = DownScore;
-        for(int j=0;j<GRID_LENGTH;j++){
-            nbSeedTop+=boardGrid[0][j];
-            nbSeedDown+=boardGrid[1][j];
+        for (int j = 0; j < GRID_LENGTH; j++) {
+            nbSeedTop += boardGrid[0][j];
+            nbSeedDown += boardGrid[1][j];
         }
-        nbSeedRest=nbSeedDown+nbSeedTop;
+        nbSeedRest = nbSeedDown + nbSeedTop;
     }
 
     @Override
@@ -140,13 +140,13 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
     public boolean isGameOver() {
         if (this.possibleMovesDown().isEmpty()) {
             for (int i = 0; i < GRID_LENGTH; i++) {
-                this.TopScore += boardGrid[1][i];
+                this.TopScore += boardGrid[0][i];
             }
             return true;
         }
         if (this.possibleMovesTop().isEmpty()) {
             for (int i = 0; i < GRID_LENGTH; i++) {
-                this.DownScore += boardGrid[0][i];
+                this.DownScore += boardGrid[1][i];
             }
             return true;
         }
@@ -155,7 +155,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     @Override
     public ArrayList<Score<AwaleRole>> getScores() {
-        ArrayList<Score<AwaleRole>> scores = new ArrayList<Score<AwaleRole>>();
+        ArrayList<Score<AwaleRole>> scores = new ArrayList<>();
         if (this.isGameOver()) {
             if (TopScore < DownScore) {
                 scores.add(new Score<>(AwaleRole.Top, Score.Status.LOOSE, 0));
