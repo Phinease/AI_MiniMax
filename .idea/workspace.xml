@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="TP4 - 1 Over">
+    <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" afterDir="false" />
     </list>
@@ -182,7 +181,14 @@
       <option name="project" value="LOCAL" />
       <updated>1613259578054</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="awaleHeristic">
+      <created>1613260881443</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1613260881443</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,6 +209,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="TP3 - 1 Over" />
     <MESSAGE value="TP4 - 1 Over" />
-    <option name="LAST_COMMIT_MESSAGE" value="TP4 - 1 Over" />
+    <MESSAGE value="awaleHeristic" />
+    <option name="LAST_COMMIT_MESSAGE" value="awaleHeristic" />
   </component>
 </project>
