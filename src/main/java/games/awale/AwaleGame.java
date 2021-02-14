@@ -8,7 +8,7 @@ import iialib.games.algs.algorithms.MiniMax;
 
 import java.util.ArrayList;
 
-public class AwaleGame extends AbstractGame<AwaleMove, AwaleRole, AwaleBoard> {
+class AwaleGame extends AbstractGame<AwaleMove, AwaleRole, AwaleBoard> {
 
     public AwaleGame(ArrayList<AIPlayer<AwaleMove, AwaleRole, AwaleBoard>> aiPlayers, AwaleBoard initialBoard) {
         super(aiPlayers, initialBoard);

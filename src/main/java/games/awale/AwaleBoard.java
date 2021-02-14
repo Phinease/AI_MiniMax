@@ -12,6 +12,9 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
     private final int[][] boardGrid;
     private int TopScore = 0;
     private int DownScore = 0;
+    public int nbSeedTop=0;
+    public int nbSeedDown=0;
+    public int nbSeedRest=0;
 
     // ---------------------- Constructors ---------------------
     public AwaleBoard() {
@@ -21,12 +24,22 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 boardGrid[i][j] = 4;
             }
         }
+        for(int j=0;j<GRID_LENGTH;j++){
+            nbSeedTop+=boardGrid[0][j];
+            nbSeedDown+=boardGrid[1][j];
+        }
+        nbSeedRest=nbSeedDown+nbSeedTop;
     }
 
     public AwaleBoard(int[][] other, int TopScore, int DownScore) {
         boardGrid = other;
         this.TopScore = TopScore;
         this.DownScore = DownScore;
+        for(int j=0;j<GRID_LENGTH;j++){
+            nbSeedTop+=boardGrid[0][j];
+            nbSeedDown+=boardGrid[1][j];
+        }
+        nbSeedRest=nbSeedDown+nbSeedTop;
     }
 
     @Override
