@@ -139,7 +139,11 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         }
 
         if (nourir) {
-            return boardGrid[(playerRole == AwaleRole.Top) ? 0 : 1][move.take] > 5 - move.take;
+            if (playerRole == AwaleRole.Top) {
+                return boardGrid[0][move.take] > move.take;
+            } else {
+                return boardGrid[1][move.take] > 6 - move.take;
+            }
         }
 
         return boardGrid[(playerRole == AwaleRole.Top) ? 0 : 1][move.take] > 0;

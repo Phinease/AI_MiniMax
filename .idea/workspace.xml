@@ -7,15 +7,7 @@
     <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="TP4 - 1 Over">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleHeuristics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleMove.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleMove.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/dominos/DominosBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/dominos/DominosBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/games/otherGame/otherGameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/otherGame/otherGameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/AbstractGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/AbstractGame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/IHeuristic.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/IHeuristic.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/MiniMax.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/MiniMax.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,11 +37,6 @@
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="master" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -120,17 +107,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TP_IA [dependencies]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -154,11 +130,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.AwaleGame" />
         <item itemvalue="Gradle.TP_IA [dependencies]" />
         <item itemvalue="Application.DominosGame" />
-        <item itemvalue="Application.AwaleGame" />
-        <item itemvalue="Application.AwaleGame" />
-        <item itemvalue="Gradle.TP_IA [dependencies]" />
       </list>
     </recent_temporary>
   </component>
@@ -174,8 +148,6 @@
       <workItem from="1612538964292" duration="1662000" />
       <workItem from="1613251131780" duration="2571000" />
       <workItem from="1613253924716" duration="6117000" />
-      <workItem from="1613334093426" duration="362000" />
-      <workItem from="1613340789197" duration="4846000" />
     </task>
     <task id="LOCAL-00001" summary="TP3 - 1 Over">
       <created>1613228706231</created>
@@ -198,14 +170,7 @@
       <option name="project" value="LOCAL" />
       <updated>1613259578054</updated>
     </task>
-    <task id="LOCAL-00004" summary="TP4 - 1 Over">
-      <created>1613262040606</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1613262040606</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

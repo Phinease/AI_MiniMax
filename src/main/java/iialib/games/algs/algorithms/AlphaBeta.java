@@ -65,7 +65,7 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
 
         for (int i = 1; i < moves.size(); i++) {
             Move move = moves.get(i);
-            int value = alphabeta(board.play(move, playerMaxRole), 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole);
+            int value = alphabeta(board.play(move, playerMaxRole), 1, alpha, IHeuristic.MAX_VALUE, playerMinRole);
             if (value > alpha) {
                 alpha = value;
                 // System.out.println("CHANGED");
