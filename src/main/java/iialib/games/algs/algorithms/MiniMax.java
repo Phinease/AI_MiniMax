@@ -55,16 +55,16 @@ public class MiniMax<Move extends IMove, Role extends IRole, Board extends IBoar
         this.playerMaxRole = playerMaxRole;
         this.playerMinRole = playerMinRole;
         this.h = h;
-        this.nbNodes=0;
-        this.nbLeaves=0;
+        this.nbNodes = 0;
+        this.nbLeaves = 0;
     }
 
     //
     public MiniMax(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {
         this(playerMaxRole, playerMinRole, h);
         this.depthMax = depthMax;
-        this.nbNodes=0;
-        this.nbLeaves=0;
+        this.nbNodes = 0;
+        this.nbLeaves = 0;
     }
 
     /*

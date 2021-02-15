@@ -19,6 +19,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
     public int nbSeedRest;
 
     // ---------------------- Constructors ---------------------
+
     public AwaleBoard() {
         boardGrid = new int[GRID_HEIGHT][GRID_LENGTH];
         for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -57,89 +58,90 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     @Override
     public AwaleBoard play(AwaleMove move, AwaleRole playerRole) {
-        int[][] newGrid = copyGrid(boardGrid);
-        int player = (playerRole == AwaleRole.Top) ? 0 : 1;
-        int Nbstones = newGrid[player][move.take];
-        int index = (player == 0) ? move.take - 1 : move.take + 1;
-        // System.out.println("Move: " + move + ", Nbstones: " + Nbstones);
+        // Initialisation de nombre de graine et la position à poser
+        int[][] newgrid = copyGrid(boardGrid);
+        int indexplayer = (playerRole == AwaleRole.Top) ? 0 : 1;
+        int nbgraines = newgrid[indexplayer][move.take];
+        int index = (indexplayer == 0) ? move.take - 1 : move.take + 1;
+        newgrid[indexplayer][move.take] = 0;
+        // System.out.println("Move: " + move + ", nbgraines: " + nbgraines);
 
-        newGrid[player][move.take] = 0;
+        // Poser les graines en ordre de la régle
         while (true) {
-            if (player == ((playerRole == AwaleRole.Top) ? 0 : 1) && index == move.take) {
-                if (player == 0) {
-                    index--;
-                } else {
-                    index++;
-                }
+            // Passer la case qu'on prend les graines
+            if (indexplayer == ((playerRole == AwaleRole.Top) ? 0 : 1) && index == move.take) {
+                index += (indexplayer == 0) ? -1 : 1;
             }
 
+            // Changer de la direction au bord de grid
             if (index >= GRID_LENGTH) {
-                player = (player + 1) % 2;
+                indexplayer = (indexplayer + 1) % 2;
                 index = 5;
             }
             if (index < 0) {
-                player = (player + 1) % 2;
+                indexplayer = (indexplayer + 1) % 2;
                 index = 0;
             }
 
-            newGrid[player][index] += 1;
-            Nbstones--;
+            newgrid[indexplayer][index] += 1;
+            nbgraines--;
+            if (nbgraines == 0) break;
 
-            if (Nbstones == 0) break;
-
-            if (player == 0) {
-                index--;
-            } else {
-                index++;
-            }
+            // Avancer une case
+            index += (indexplayer == 0) ? -1 : 1;
         }
 
+        // ------- Calculer les scores -------
+
+        // Sauvegarder la situation actuel si on famine l'ennemi
         int newTopScore = TopScore;
         int newDownScore = DownScore;
-        int[][] backup = copyGrid(newGrid);
+        int[][] backup = copyGrid(newgrid);
+
+        // Calculer combien à tirer
         int enemy = (playerRole == AwaleRole.Top) ? 1 : 0;
-        if (player == enemy) {
-            boolean bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
-            while (bonus) {
-                if (playerRole == AwaleRole.Top) {
-                    newTopScore += newGrid[player][index];
-                } else {
-                    newDownScore += newGrid[player][index];
-                }
-
-                newGrid[player][index] = 0;
-                index += (player == 0) ? 1 : -1;
-
-                // Debug
-                // if (index >= GRID_LENGTH || index < 0) break;
-
-                if (index >= GRID_LENGTH) {
-                    player = (player + 1) % 2;
-                    index = 5;
-                }
-                if (index < 0) {
-                    player = (player + 1) % 2;
-                    index = 0;
-                }
-                bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
+        boolean bonus = indexplayer == enemy && ((newgrid[indexplayer][index] == 2) || (newgrid[indexplayer][index] == 3));
+        while (bonus) {
+            if (playerRole == AwaleRole.Top) {
+                newTopScore += newgrid[indexplayer][index];
+            } else {
+                newDownScore += newgrid[indexplayer][index];
             }
+
+            newgrid[indexplayer][index] = 0;
+            index += (indexplayer == 0) ? 1 : -1;
+
+            // Debug
+            // On sais que on ne peux pas tirer les cases de notre coté
+            // Mais si on suit la régle, la partie ne s'arrête pas dans certaine situation
+            // if (index >= GRID_LENGTH || index < 0) break;
+
+            if (index >= GRID_LENGTH) {
+                indexplayer = (indexplayer + 1) % 2;
+                index = 5;
+            }
+            if (index < 0) {
+                indexplayer = (indexplayer + 1) % 2;
+                index = 0;
+            }
+            bonus = (newgrid[indexplayer][index] == 2) || (newgrid[indexplayer][index] == 3);
         }
 
+        // Si on famine l'ennemi, on retourne un board sans pris de graine
         boolean famine = true;
-        for (int i = 0; i < GRID_LENGTH; i++) famine = famine && (newGrid[enemy][i] == 0);
+        for (int i = 0; i < GRID_LENGTH; i++) famine = famine && (newgrid[enemy][i] == 0);
         if (famine) return new AwaleBoard(backup, TopScore, DownScore);
 
-        return new AwaleBoard(newGrid, newTopScore, newDownScore);
+        return new AwaleBoard(newgrid, newTopScore, newDownScore);
     }
 
     @Override
     public boolean isValidMove(AwaleMove move, AwaleRole playerRole) {
-        boolean nourir = true;
-        for (int i = 0; i < 6; i++) {
-            nourir = nourir && (boardGrid[(playerRole == AwaleRole.Top) ? 1 : 0][i] == 0);
-        }
+        // Vérifier si on a besoin de nourrir l'ennemi
+        boolean nourrir = true;
+        for (int i = 0; i < 6; i++) nourrir = nourrir && (boardGrid[(playerRole == AwaleRole.Top) ? 1 : 0][i] == 0);
 
-        if (nourir) {
+        if (nourrir) {
             if (playerRole == AwaleRole.Top) {
                 return boardGrid[0][move.take] > move.take;
             } else {
@@ -147,11 +149,13 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             }
         }
 
+        // Vérifier si la case est vide
         return boardGrid[(playerRole == AwaleRole.Top) ? 0 : 1][move.take] > 0;
     }
 
     @Override
     public boolean isGameOver() {
+        // Si un joueur n'a pas de coups et l'autre coté ne peut pas lui nourrir (isValidMove dans possibleMovesXXXX)
         if (this.possibleMovesTop().isEmpty() && this.possibleMovesDown().isEmpty()) {
             for (int i = 0; i < GRID_LENGTH; i++) {
                 if (boardGrid[0][i] != 0) {
@@ -162,6 +166,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             }
             return true;
         }
+        //
         return DownScore > 24 || TopScore > 24 || DownScore + TopScore > 41;
     }
 
@@ -170,11 +175,11 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         ArrayList<Score<AwaleRole>> scores = new ArrayList<>();
         if (this.isGameOver()) {
             if (TopScore < DownScore) {
-                scores.add(new Score<>(AwaleRole.Top, Score.Status.LOOSE, 0));
-                scores.add(new Score<>(AwaleRole.Down, Score.Status.WIN, 1));
+                scores.add(new Score<>(AwaleRole.Top, Score.Status.LOOSE, TopScore));
+                scores.add(new Score<>(AwaleRole.Down, Score.Status.WIN, DownScore));
             } else if (TopScore > DownScore) {
-                scores.add(new Score<>(AwaleRole.Top, Score.Status.WIN, 1));
-                scores.add(new Score<>(AwaleRole.Down, Score.Status.LOOSE, 0));
+                scores.add(new Score<>(AwaleRole.Top, Score.Status.WIN, TopScore));
+                scores.add(new Score<>(AwaleRole.Down, Score.Status.LOOSE, DownScore));
             }
         }
         return scores;
@@ -200,7 +205,6 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         for (int i = 0; i < GRID_HEIGHT; i++) {
             System.arraycopy(boardGrid[i], 0, newGrid[i], 0, GRID_LENGTH);
         }
-
         return newGrid;
     }
 

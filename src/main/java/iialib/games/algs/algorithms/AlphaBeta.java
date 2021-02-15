@@ -22,8 +22,8 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         this.playerMaxRole = playerMaxRole;
         this.playerMinRole = playerMinRole;
         this.h = h;
-        this.nbNodes=0;
-        this.nbLeaves=0;
+        this.nbNodes = 0;
+        this.nbLeaves = 0;
     }
 
     public AlphaBeta(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {

@@ -165,14 +165,14 @@ public class DominosBoard implements IBoard<DominosMove, DominosRole, DominosBoa
 
     @Override
     public ArrayList<Score<DominosRole>> getScores() {
-        ArrayList<Score<DominosRole>> scores = new ArrayList<Score<DominosRole>>();
+        ArrayList<Score<DominosRole>> scores = new ArrayList<>();
         if (this.isGameOver()) {
             if (nbHorizontalMoves() == 0) {
-                scores.add(new Score<DominosRole>(DominosRole.HORIZONTAL, Score.Status.LOOSE, 0));
-                scores.add(new Score<DominosRole>(DominosRole.VERTICAL, Score.Status.WIN, 1));
+                scores.add(new Score<>(DominosRole.HORIZONTAL, Score.Status.LOOSE, 0));
+                scores.add(new Score<>(DominosRole.VERTICAL, Score.Status.WIN, 1));
             } else {
-                scores.add(new Score<DominosRole>(DominosRole.HORIZONTAL, Score.Status.WIN, 1));
-                scores.add(new Score<DominosRole>(DominosRole.VERTICAL, Score.Status.LOOSE, 0));
+                scores.add(new Score<>(DominosRole.HORIZONTAL, Score.Status.WIN, 1));
+                scores.add(new Score<>(DominosRole.VERTICAL, Score.Status.LOOSE, 0));
             }
         }
         return scores;
