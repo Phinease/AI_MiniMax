@@ -34,14 +34,14 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         this.depthMax = depthMax;
     }
 
-    private int minMax(Board board, int depth) {
+    private int minMax(Board board, int depth,int alpha,int beta) {
         // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMinRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMinRole);
         } else {
             for (Move move : moves) {
-                beta = Math.min(beta, maxMin(board.play(move, playerMinRole), depth + 1));
+                beta = Math.min(beta, maxMin(board.play(move, playerMinRole), depth + 1,alpha,beta));
                 if (alpha >= beta)
                     return alpha;
             }
@@ -49,14 +49,14 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         }
     }
 
-    private int maxMin(Board board, int depth) {
+    private int maxMin(Board board, int depth,int alpha,int beta) {
         // System.out.println("Prof: " + depth);
         ArrayList<Move> moves = board.possibleMoves(playerMaxRole);
         if (depth == depthMax || moves.isEmpty()) {
             return h.eval(board, playerMaxRole);
         } else {
             for (Move move : moves) {
-                alpha = Math.max(alpha, minMax(board.play(move, playerMaxRole), depth + 1));
+                alpha = Math.max(alpha, minMax(board.play(move, playerMaxRole), depth + 1,alpha,beta));
                 if (alpha >= beta)
                     return beta;
             }
@@ -71,11 +71,11 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
         Board firstTry = board.play(bestMove, playerRole);
-        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1) : minMax(firstTry, 1);
+        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1,this.alpha,this.beta) : minMax(firstTry, 1,this.alpha,this.beta);
 
         if (playerRole == playerMaxRole) {
             for (int i = 1; i < moves.size(); i++) {
-                int newVal = maxMin(firstTry, 1);
+                int newVal = maxMin(firstTry, 1,this.alpha,this.beta);
                 if (newVal > best) {
                     bestMove = moves.get(i);
                     best = newVal;
@@ -83,7 +83,7 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
             }
         } else {
             for (int i = 1; i < moves.size(); i++) {
-                int newVal = minMax(firstTry, 1);
+                int newVal = minMax(firstTry, 1,this.alpha,this.beta);
                 if (newVal < best) {
                     bestMove = moves.get(i);
                     best = newVal;
