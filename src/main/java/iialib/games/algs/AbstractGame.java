@@ -43,6 +43,7 @@ public abstract class AbstractGame<Move extends IMove, Role extends IRole, Board
         }
 
         System.out.println("Game over ! Tour " + tour);
+        System.out.println("Final State: \n" + currentBoard);
         ArrayList<Score<Role>> scores = currentBoard.getScores();
         for (AIPlayer<Move, Role, Board> p : players)
             for (Score<Role> s : scores)

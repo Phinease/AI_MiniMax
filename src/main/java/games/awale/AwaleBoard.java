@@ -1,6 +1,5 @@
 package games.awale;
 
-import games.dominos.DominosBoard;
 import iialib.games.model.IBoard;
 import iialib.games.model.Score;
 
@@ -71,7 +70,17 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 index = 0;
             }
 
-            newGrid[player][index] += 1;
+            if (player == ((playerRole == AwaleRole.Top) ? 0 : 1) && index == move.take) {
+                if (player == 0) {
+                    index--;
+                } else {
+                    index++;
+                }
+                continue;
+            } else {
+                newGrid[player][index] += 1;
+            }
+
             Nbstones--;
             if (Nbstones == 0) break;
 
@@ -150,7 +159,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             }
             return true;
         }
-        return false;
+        return DownScore > 24 || TopScore > 24 || DownScore + TopScore > 41;
     }
 
     @Override
@@ -178,7 +187,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     private ArrayList<AwaleMove> possibleMovesTop() {
         ArrayList<AwaleMove> allPossibleMovesTop = new ArrayList<>();
-        for (int j = 0; j < GRID_LENGTH - 1; j++) {
+        for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[0][j] > 0) {
                 allPossibleMovesTop.add(new AwaleMove(j));
             }
@@ -188,7 +197,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     private ArrayList<AwaleMove> possibleMovesDown() {
         ArrayList<AwaleMove> allPossibleMovesDown = new ArrayList<>();
-        for (int j = 0; j < GRID_LENGTH - 1; j++) {
+        for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[1][j] > 0) {
                 allPossibleMovesDown.add(new AwaleMove(j));
             }

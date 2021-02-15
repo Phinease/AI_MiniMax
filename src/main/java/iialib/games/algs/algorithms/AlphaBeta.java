@@ -70,24 +70,15 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
 
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
-        Board firstTry = board.play(bestMove, playerRole);
-        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1) : minMax(firstTry, 1);
+        Board coup = board.play(moves.get(0), playerRole);
+        int best = minMax(coup, 1);
 
-        if (playerRole == playerMaxRole) {
-            for (int i = 1; i < moves.size(); i++) {
-                int newVal = maxMin(firstTry, 1);
-                if (newVal > best) {
-                    bestMove = moves.get(i);
-                    best = newVal;
-                }
-            }
-        } else {
-            for (int i = 1; i < moves.size(); i++) {
-                int newVal = minMax(firstTry, 1);
-                if (newVal < best) {
-                    bestMove = moves.get(i);
-                    best = newVal;
-                }
+        for (int i = 1; i < moves.size(); i++) {
+            coup = board.play(moves.get(i), playerRole);
+            int newVal = minMax(coup, 1);
+            if (newVal > best) {
+                bestMove = moves.get(i);
+                best = newVal;
             }
         }
 

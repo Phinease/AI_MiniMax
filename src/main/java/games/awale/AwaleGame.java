@@ -1,6 +1,5 @@
 package games.awale;
 
-import games.dominos.*;
 import iialib.games.algs.AIPlayer;
 import iialib.games.algs.AbstractGame;
 import iialib.games.algs.GameAlgorithm;
@@ -32,16 +31,16 @@ class AwaleGame extends AbstractGame<AwaleMove, AwaleRole, AwaleBoard> {
 //                roleH, roleV, DominosHeuristics.hHorizontal, 2); // Alphabeta depth 2
 
 
-        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerV = new AIPlayer<>(
+        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerT = new AIPlayer<>(
                 roleT, algT);
 
-        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerH = new AIPlayer<>(
+        AIPlayer<AwaleMove, AwaleRole, AwaleBoard> playerD = new AIPlayer<>(
                 roleD, algD);
 
         ArrayList<AIPlayer<AwaleMove, AwaleRole, AwaleBoard>> players = new ArrayList<>();
 
-        players.add(playerV); // First Player
-        players.add(playerH); // Second Player
+        players.add(playerT); // First Player
+        players.add(playerD); // Second Player
 
         // Setting the initial Board
         AwaleBoard initialBoard = new AwaleBoard();

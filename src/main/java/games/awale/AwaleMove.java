@@ -10,5 +10,5 @@ public class AwaleMove implements IMove {
     }
 
     @Override
-    public String toString() { return "Move{" + take + "}"; }
+    public String toString() { return "Move{" + (take + 1) + "}"; }
 }
