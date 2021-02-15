@@ -53,7 +53,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     @Override
     public AwaleBoard play(AwaleMove move, AwaleRole playerRole) {
-        int[][] newGrid = copyGrid();
+        int[][] newGrid = copyGrid(boardGrid);
         int player = (playerRole == AwaleRole.Top) ? 0 : 1;
         int Nbstones = newGrid[player][move.take];
         int index = (player == 0) ? move.take - 1 : move.take + 1;
@@ -93,7 +93,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
         int newTopScore = TopScore;
         int newDownScore = DownScore;
-        int[][] backup = newGrid.clone();
+        int[][] backup = copyGrid(newGrid);
         int enemy = (playerRole == AwaleRole.Top) ? 1 : 0;
         if (player == enemy) {
             boolean bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
@@ -107,21 +107,15 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 newGrid[player][index] = 0;
                 index += (player == 0) ? 1 : -1;
 
-                if (index >= GRID_LENGTH || index < 0) {
-                    break;
-                }
+                if (index >= GRID_LENGTH || index < 0) break;
                 bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
             }
         }
 
         boolean famine = true;
-        for (int i = 0; i < GRID_LENGTH; i++) {
-            famine = famine && (newGrid[enemy][i] == 0);
-        }
-        if (famine) {
+        for (int i = 0; i < GRID_LENGTH; i++) famine = famine && (newGrid[enemy][i] == 0);
+        if (famine) return new AwaleBoard(backup, TopScore, DownScore);
 
-            return new AwaleBoard(backup, TopScore, DownScore);
-        }
         return new AwaleBoard(newGrid, newTopScore, newDownScore);
     }
 
@@ -173,7 +167,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         return scores;
     }
 
-    private int[][] copyGrid() {
+    private int[][] copyGrid(int[][] boardGrid) {
         int[][] newGrid = new int[GRID_HEIGHT][GRID_LENGTH];
         for (int i = 0; i < GRID_HEIGHT; i++) {
             System.arraycopy(boardGrid[i], 0, newGrid[i], 0, GRID_LENGTH);
