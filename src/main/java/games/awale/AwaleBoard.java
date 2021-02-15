@@ -57,9 +57,18 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         int player = (playerRole == AwaleRole.Top) ? 0 : 1;
         int Nbstones = newGrid[player][move.take];
         int index = (player == 0) ? move.take - 1 : move.take + 1;
+        // System.out.println("Move: " + move + ", Nbstones: " + Nbstones);
 
         newGrid[player][move.take] = 0;
         while (true) {
+            if (player == ((playerRole == AwaleRole.Top) ? 0 : 1) && index == move.take) {
+                if (player == 0) {
+                    index--;
+                } else {
+                    index++;
+                }
+            }
+
             if (index >= GRID_LENGTH) {
                 player = (player + 1) % 2;
                 index = 5;
@@ -70,18 +79,9 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 index = 0;
             }
 
-            if (player == ((playerRole == AwaleRole.Top) ? 0 : 1) && index == move.take) {
-                if (player == 0) {
-                    index--;
-                } else {
-                    index++;
-                }
-                continue;
-            } else {
-                newGrid[player][index] += 1;
-            }
-
+            newGrid[player][index] += 1;
             Nbstones--;
+
             if (Nbstones == 0) break;
 
             if (player == 0) {
@@ -151,32 +151,17 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     @Override
     public boolean isGameOver() {
-        if(this.possibleMovesTop().isEmpty()&&this.possibleMovesDown().isEmpty()){
-            for(int i=0;i<GRID_LENGTH;i++){
-                if(boardGrid[0][i]!=0){
+        if (this.possibleMovesTop().isEmpty() && this.possibleMovesDown().isEmpty()) {
+            for (int i = 0; i < GRID_LENGTH; i++) {
+                if (boardGrid[0][i] != 0) {
                     this.TopScore += boardGrid[0][i];
-                    return true;
-                }else{
-                    this.DownScore+=boardGrid[1][i];
-                    return true;
+                } else {
+                    this.DownScore += boardGrid[1][i];
                 }
             }
-            return false;
+            return true;
         }
         return DownScore > 24 || TopScore > 24 || DownScore + TopScore > 41;
-//
-//        if (this.possibleMovesDown().isEmpty()) {
-//            for (int i = 0; i < GRID_LENGTH; i++) {
-//                this.TopScore += boardGrid[0][i];
-//            }
-//            return true;
-//        }
-//        if (this.possibleMovesTop().isEmpty()) {
-//            for (int i = 0; i < GRID_LENGTH; i++) {
-//                this.DownScore += boardGrid[1][i];
-//            }
-//            return true;
-//        }
     }
 
     @Override
@@ -199,6 +184,7 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         for (int i = 0; i < GRID_HEIGHT; i++) {
             System.arraycopy(boardGrid[i], 0, newGrid[i], 0, GRID_LENGTH);
         }
+
         return newGrid;
     }
 
@@ -206,9 +192,8 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         ArrayList<AwaleMove> allPossibleMovesTop = new ArrayList<>();
         for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[0][j] > 0) {
-                AwaleMove possible=new AwaleMove(j);
-                if(isValidMove(possible,AwaleRole.Top))
-                    allPossibleMovesTop.add(new AwaleMove(j));
+                AwaleMove possible = new AwaleMove(j);
+                if (isValidMove(possible, AwaleRole.Top)) allPossibleMovesTop.add(possible);
             }
         }
         return allPossibleMovesTop;
@@ -218,9 +203,8 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         ArrayList<AwaleMove> allPossibleMovesDown = new ArrayList<>();
         for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[1][j] > 0) {
-                AwaleMove possible=new AwaleMove(j);
-                if(isValidMove(possible,AwaleRole.Down))
-                    allPossibleMovesDown.add(new AwaleMove(j));
+                AwaleMove possible = new AwaleMove(j);
+                if (isValidMove(possible, AwaleRole.Down)) allPossibleMovesDown.add(possible);
             }
         }
         return allPossibleMovesDown;

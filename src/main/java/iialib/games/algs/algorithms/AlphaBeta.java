@@ -6,7 +6,6 @@ import iialib.games.model.IBoard;
 import iialib.games.model.IMove;
 import iialib.games.model.IRole;
 
-import javax.management.relation.Role;
 import java.util.ArrayList;
 
 public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBoard<Move, Role, Board>> implements GameAlgorithm<Move, Role, Board> {
@@ -31,6 +30,7 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
     }
 
     private int alphabeta(Board board, int depth, int alpha, int beta, Role player) {
+        // System.out.println("Depth: " + depth + ", alpha: " + alpha + ", beta: " + beta);
         ArrayList<Move> moves = board.possibleMoves(player);
         if (depth == depthMax || moves.isEmpty()) return h.eval(board, player);
 
@@ -60,31 +60,16 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         int alpha = IHeuristic.MIN_VALUE;
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
-        Board coup = board.play(moves.get(0), playerRole);
-        alpha = Math.max(alpha, alphabeta(coup, 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole));
 
-        for (int i = 1; i < moves.size(); i++) {
-            Move move = moves.get(i);
-            int value = alphabeta(board.play(move, playerMaxRole), 1, alpha, IHeuristic.MAX_VALUE, playerMinRole);
+        for (Move move : moves) {
+            Board played = board.play(move, playerRole);
+            int value = alphabeta(played, 1, alpha, IHeuristic.MAX_VALUE, playerMinRole);
             if (value > alpha) {
                 alpha = value;
                 // System.out.println("CHANGED");
                 bestMove = move;
             }
         }
-
-//        int best = alphabeta(board, 0, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMaxRole);
-//        ArrayList<Move> moves = board.possibleMoves(playerRole);
-//        Move bestMove = moves.get(0);
-//
-//        for (Move move : moves) {
-//            int value = alphabeta(board.play(move, playerMaxRole), 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole);
-//            if (value == best) {
-//                System.out.println("CHANGED");
-//                bestMove = move;
-//            }
-//        }
-
 
         return bestMove;
     }

@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,6 +104,19 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
