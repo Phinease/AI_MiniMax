@@ -68,9 +68,23 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
             int value = alphabeta(board.play(move, playerMaxRole), 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole);
             if (value > alpha) {
                 alpha = value;
+                // System.out.println("CHANGED");
                 bestMove = move;
             }
         }
+
+//        int best = alphabeta(board, 0, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMaxRole);
+//        ArrayList<Move> moves = board.possibleMoves(playerRole);
+//        Move bestMove = moves.get(0);
+//
+//        for (Move move : moves) {
+//            int value = alphabeta(board.play(move, playerMaxRole), 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole);
+//            if (value == best) {
+//                System.out.println("CHANGED");
+//                bestMove = move;
+//            }
+//        }
+
 
         return bestMove;
     }
