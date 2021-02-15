@@ -8,6 +8,9 @@ import java.util.ArrayList;
 class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
     private static final int GRID_LENGTH = 6;
     private static final int GRID_HEIGHT = 2;
+
+    // int[GRID_HEIGHT][GRID_LENGTH]
+    // boardGrid[0] - Cases de joueur Top / boardGrid[1] - Cases de joueur Down
     private final int[][] boardGrid;
     private int TopScore = 0;
     private int DownScore = 0;
@@ -41,6 +44,8 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         nbSeedRest = nbSeedDown + nbSeedTop;
     }
 
+    // ---------------------- Public Methods ---------------------
+
     @Override
     public ArrayList<AwaleMove> possibleMoves(AwaleRole playerRole) {
         if (playerRole == AwaleRole.Top) {
@@ -49,7 +54,6 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             return possibleMovesDown();
         }
     }
-
 
     @Override
     public AwaleBoard play(AwaleMove move, AwaleRole playerRole) {
@@ -73,7 +77,6 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 player = (player + 1) % 2;
                 index = 5;
             }
-
             if (index < 0) {
                 player = (player + 1) % 2;
                 index = 0;
@@ -107,7 +110,17 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 newGrid[player][index] = 0;
                 index += (player == 0) ? 1 : -1;
 
-                if (index >= GRID_LENGTH || index < 0) break;
+                // Debug
+                // if (index >= GRID_LENGTH || index < 0) break;
+
+                if (index >= GRID_LENGTH) {
+                    player = (player + 1) % 2;
+                    index = 5;
+                }
+                if (index < 0) {
+                    player = (player + 1) % 2;
+                    index = 0;
+                }
                 bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
             }
         }
@@ -167,6 +180,21 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         return scores;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder retstr = new StringBuilder();
+        for (int i = 0; i < GRID_HEIGHT; i++) {
+            for (int j = 0; j < GRID_LENGTH; j++) {
+                retstr.append(boardGrid[i][j]).append("\t");
+            }
+            retstr.append("\n");
+        }
+        retstr.append(TopScore).append(", ").append(DownScore).append("\n");
+        return retstr.toString();
+    }
+
+    // ---------------------- Private Methods ---------------------
+
     private int[][] copyGrid(int[][] boardGrid) {
         int[][] newGrid = new int[GRID_HEIGHT][GRID_LENGTH];
         for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -196,18 +224,5 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             }
         }
         return allPossibleMovesDown;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder retstr = new StringBuilder();
-        for (int i = 0; i < GRID_HEIGHT; i++) {
-            for (int j = 0; j < GRID_LENGTH; j++) {
-                retstr.append(boardGrid[i][j]).append("\t");
-            }
-            retstr.append("\n");
-        }
-        retstr.append(TopScore).append(", ").append(DownScore).append("\n");
-        return retstr.toString();
     }
 }
