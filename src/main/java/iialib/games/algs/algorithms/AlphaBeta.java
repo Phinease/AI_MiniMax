@@ -22,6 +22,8 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         this.playerMaxRole = playerMaxRole;
         this.playerMinRole = playerMinRole;
         this.h = h;
+        this.nbNodes=0;
+        this.nbLeaves=0;
     }
 
     public AlphaBeta(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {
@@ -32,11 +34,15 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
     private int alphabeta(Board board, int depth, int alpha, int beta, Role player) {
         // System.out.println("Depth: " + depth + ", alpha: " + alpha + ", beta: " + beta);
         ArrayList<Move> moves = board.possibleMoves(player);
-        if (depth == depthMax || moves.isEmpty()) return h.eval(board, player);
+        if (depth == depthMax || moves.isEmpty()) {
+            this.nbLeaves++;
+            return h.eval(board, player);
+        }
 
         if (player == playerMaxRole) {
             int value = IHeuristic.MIN_VALUE;
             for (Move move : moves) {
+                this.nbNodes++;
                 value = Math.max(value, alphabeta(board.play(move, playerMaxRole), depth + 1, alpha, beta, playerMinRole));
                 alpha = Math.max(alpha, value);
                 if (alpha >= beta) return beta;
@@ -45,6 +51,7 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         } else {
             int value = IHeuristic.MAX_VALUE;
             for (Move move : moves) {
+                this.nbNodes++;
                 value = Math.min(value, alphabeta(board.play(move, playerMinRole), depth + 1, alpha, beta, playerMaxRole));
                 beta = Math.min(beta, value);
                 if (alpha >= beta) return alpha;
@@ -70,6 +77,8 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
                 bestMove = move;
             }
         }
+        System.out.println("Le nombre de feuille est " + this.nbLeaves);
+        System.out.println("Le nombre de noeud est " + this.nbNodes);
 
         return bestMove;
     }
