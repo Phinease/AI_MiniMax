@@ -107,13 +107,8 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
                 newGrid[player][index] = 0;
                 index += (player == 0) ? 1 : -1;
 
-                if (index >= GRID_LENGTH) {
-                    player = (player + 1) % 2;
-                    index = 5;
-                }
-                if (index < 0) {
-                    player = (player + 1) % 2;
-                    index = 0;
+                if (index >= GRID_LENGTH || index < 0) {
+                    break;
                 }
                 bonus = (newGrid[player][index] == 2) || (newGrid[player][index] == 3);
             }
@@ -124,9 +119,8 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
             famine = famine && (newGrid[enemy][i] == 0);
         }
         if (famine) {
-            newGrid = backup;
-            newTopScore = TopScore;
-            newDownScore = DownScore;
+
+            return new AwaleBoard(backup, TopScore, DownScore);
         }
         return new AwaleBoard(newGrid, newTopScore, newDownScore);
     }
