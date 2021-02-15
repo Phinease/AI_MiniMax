@@ -151,19 +151,32 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
 
     @Override
     public boolean isGameOver() {
-        if (this.possibleMovesDown().isEmpty()) {
-            for (int i = 0; i < GRID_LENGTH; i++) {
-                this.TopScore += boardGrid[0][i];
+        if(this.possibleMovesTop().isEmpty()&&this.possibleMovesDown().isEmpty()){
+            for(int i=0;i<GRID_LENGTH;i++){
+                if(boardGrid[0][i]!=0){
+                    this.TopScore += boardGrid[0][i];
+                    return true;
+                }else{
+                    this.DownScore+=boardGrid[1][i];
+                    return true;
+                }
             }
-            return true;
-        }
-        if (this.possibleMovesTop().isEmpty()) {
-            for (int i = 0; i < GRID_LENGTH; i++) {
-                this.DownScore += boardGrid[1][i];
-            }
-            return true;
+            return false;
         }
         return DownScore > 24 || TopScore > 24 || DownScore + TopScore > 41;
+//
+//        if (this.possibleMovesDown().isEmpty()) {
+//            for (int i = 0; i < GRID_LENGTH; i++) {
+//                this.TopScore += boardGrid[0][i];
+//            }
+//            return true;
+//        }
+//        if (this.possibleMovesTop().isEmpty()) {
+//            for (int i = 0; i < GRID_LENGTH; i++) {
+//                this.DownScore += boardGrid[1][i];
+//            }
+//            return true;
+//        }
     }
 
     @Override
@@ -193,7 +206,9 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         ArrayList<AwaleMove> allPossibleMovesTop = new ArrayList<>();
         for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[0][j] > 0) {
-                allPossibleMovesTop.add(new AwaleMove(j));
+                AwaleMove possible=new AwaleMove(j);
+                if(isValidMove(possible,AwaleRole.Top))
+                    allPossibleMovesTop.add(new AwaleMove(j));
             }
         }
         return allPossibleMovesTop;
@@ -203,7 +218,9 @@ class AwaleBoard implements IBoard<AwaleMove, AwaleRole, AwaleBoard> {
         ArrayList<AwaleMove> allPossibleMovesDown = new ArrayList<>();
         for (int j = 0; j < GRID_LENGTH; j++) {
             if (boardGrid[1][j] > 0) {
-                allPossibleMovesDown.add(new AwaleMove(j));
+                AwaleMove possible=new AwaleMove(j);
+                if(isValidMove(possible,AwaleRole.Down))
+                    allPossibleMovesDown.add(new AwaleMove(j));
             }
         }
         return allPossibleMovesDown;

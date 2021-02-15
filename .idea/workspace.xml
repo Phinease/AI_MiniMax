@@ -7,7 +7,7 @@
     <list default="true" id="1b0fae12-28ea-4a8a-89d0-287cf887c739" name="Default Changelist" comment="TP4 - 1 Over">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/iialib/games/algs/algorithms/AlphaBeta.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/games/awale/AwaleGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
