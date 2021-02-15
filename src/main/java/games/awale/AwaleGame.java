@@ -31,7 +31,6 @@ class AwaleGame extends AbstractGame<AwaleMove, AwaleRole, AwaleBoard> {
 //        GameAlgorithm<AwaleMove, AwaleRole, AwaleBoard> algD = new AlphaBeta<>(
 //                roleD, roleT, AwaleHeuristics.hDown, 2); // Alphabeta depth 2
 
-
         GameAlgorithm<AwaleMove, AwaleRole, AwaleBoard> algT = new MiniMax<>(
                 roleT, roleD, AwaleHeuristics.hTop, 4); // MiniMax depth 4
         GameAlgorithm<AwaleMove, AwaleRole, AwaleBoard> algD = new AlphaBeta<>(
