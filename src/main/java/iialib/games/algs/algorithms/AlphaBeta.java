@@ -13,20 +13,16 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
     private final static int DEPTH_MAX_DEFAUT = 4;
     private final Role playerMaxRole;
     private final Role playerMinRole;
+    private final IHeuristic<Board, Role> h;
     private int depthMax = DEPTH_MAX_DEFAUT;
     private int nbNodes;
     private int nbLeaves;
-    private IHeuristic<Board, Role> h;
 
-    private int alpha;
-    private int beta;
 
     public AlphaBeta(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h) {
         this.playerMaxRole = playerMaxRole;
         this.playerMinRole = playerMinRole;
         this.h = h;
-        alpha = IHeuristic.MIN_VALUE;
-        beta = IHeuristic.MAX_VALUE;
     }
 
     public AlphaBeta(Role playerMaxRole, Role playerMinRole, IHeuristic<Board, Role> h, int depthMax) {
@@ -34,33 +30,26 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
         this.depthMax = depthMax;
     }
 
-    private int minMax(Board board, int depth,int alpha,int beta) {
-        // System.out.println("Prof: " + depth);
-        ArrayList<Move> moves = board.possibleMoves(playerMinRole);
-        if (depth == depthMax || moves.isEmpty()) {
-            return h.eval(board, playerMinRole);
-        } else {
-            for (Move move : moves) {
-                beta = Math.min(beta, maxMin(board.play(move, playerMinRole), depth + 1,alpha,beta));
-                if (alpha >= beta)
-                    return alpha;
-            }
-            return beta;
-        }
-    }
+    private int alphabeta(Board board, int depth, int alpha, int beta, Role player) {
+        ArrayList<Move> moves = board.possibleMoves(player);
+        if (depth == depthMax || moves.isEmpty()) return h.eval(board, player);
 
-    private int maxMin(Board board, int depth,int alpha,int beta) {
-        // System.out.println("Prof: " + depth);
-        ArrayList<Move> moves = board.possibleMoves(playerMaxRole);
-        if (depth == depthMax || moves.isEmpty()) {
-            return h.eval(board, playerMaxRole);
-        } else {
+        if (player == playerMaxRole) {
+            int value = IHeuristic.MIN_VALUE;
             for (Move move : moves) {
-                alpha = Math.max(alpha, minMax(board.play(move, playerMaxRole), depth + 1,alpha,beta));
-                if (alpha >= beta)
-                    return beta;
+                value = Math.max(value, alphabeta(board.play(move, playerMaxRole), depth + 1, alpha, beta, playerMinRole));
+                alpha = Math.max(alpha, value);
+                if (alpha >= beta) return beta;
             }
             return alpha;
+        } else {
+            int value = IHeuristic.MAX_VALUE;
+            for (Move move : moves) {
+                value = Math.min(value, alphabeta(board.play(move, playerMinRole), depth + 1, alpha, beta, playerMaxRole));
+                beta = Math.min(beta, value);
+                if (alpha >= beta) return alpha;
+            }
+            return beta;
         }
     }
 
@@ -68,26 +57,18 @@ public class AlphaBeta<Move extends IMove, Role extends IRole, Board extends IBo
     public Move bestMove(Board board, Role playerRole) {
         System.out.println("[AlphaBeta]");
 
+        int alpha = IHeuristic.MIN_VALUE;
         ArrayList<Move> moves = board.possibleMoves(playerRole);
         Move bestMove = moves.get(0);
-        Board firstTry = board.play(bestMove, playerRole);
-        int best = (playerRole == playerMaxRole) ? maxMin(firstTry, 1) : minMax(firstTry, 1);
+        Board coup = board.play(moves.get(0), playerRole);
+        alpha = Math.max(alpha, alphabeta(coup, 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole));
 
-        if (playerRole == playerMaxRole) {
-            for (int i = 1; i < moves.size(); i++) {
-                int newVal = maxMin(firstTry, 1);
-                if (newVal > best) {
-                    bestMove = moves.get(i);
-                    best = newVal;
-                }
-            }
-        } else {
-            for (int i = 1; i < moves.size(); i++) {
-                int newVal = minMax(firstTry, 1);
-                if (newVal < best) {
-                    bestMove = moves.get(i);
-                    best = newVal;
-                }
+        for (int i = 1; i < moves.size(); i++) {
+            Move move = moves.get(i);
+            int value = alphabeta(board.play(move, playerMaxRole), 1, IHeuristic.MIN_VALUE, IHeuristic.MAX_VALUE, playerMinRole);
+            if (value > alpha) {
+                alpha = value;
+                bestMove = move;
             }
         }
 
